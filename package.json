@@ -1,0 +1,25 @@
+{
+  "name": "fix-na-prode",
+  "version": "1.0.0",
+  "description": "FixNaProde app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neketli/fix-na-prode.git"
+  },
+  "author": "FixNaProde team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neketli/fix-na-prode/issues"
+  },
+  "homepage": "https://github.com/neketli/fix-na-prode#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
