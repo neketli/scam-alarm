@@ -1,16 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-	<title>FixNaProde</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Oswald:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.ico"/>
+    <link rel="stylesheet" href="style.css">
+    <title>ScamAlarm</title>
+    <style>[v-cloak] {display: none;}</style>
 </head>
 <body>
-	
+<div class="header navbar navbar-light" style="background-color: #a1ffb7">
+    <div class="mx-auto">
+        <a class="navbar-brand" href = "#">ScamA!arm</a>
+    </div>
+</div>
+<div class="main container" id="app" v-cloak>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-	<script type="module" src="frontend.js"></script>
+    <form action="/api/rate/one" method="post">
+        <div class="mb-3 mt-5">
+            <label for="checkDomen" class="form-label">Проверьте домен на "порядочность"</label>
+            <input type="url" class="form-control" id="checkDomen" v-model="form.address">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-online-primary"  style="background-color: #a1ffb7;" @click="getOne">Проверить</button>
+        </div>
+    </form>
+
+    <form action="/api/rate/file" method="post" enctype="multipart/form-data">
+        <div class="mb-3 mt-5">
+            <label for="fileInput" class="form-label">Ещё можете загрузить нам файлик в .csv, а мы вам его проанализируем :)</label>
+            <input class="form-control" type="file" id="fileInput" name="filedata">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-online-primary" style="background-color: #a1ffb7;" @click="getCsv">Отправить</button>
+        </div>
+    </form>
+
+
+    <div v-if="urls.length">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Адрес</td>
+                    <td>Коэфициент порядочности</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="u in urls" v-if="u.value>6" class="bg-success text-white bg-gradient">
+                    <td>{{u.address}}</td>
+                    <td>{{u.value}}</td>
+                </tr>
+				<tr v-for="u in urls" v-if="u.value<7&&u.value>3" class="bg-warning bg-gradient">
+					<td>{{u.address}}</td>
+					<td>{{u.value}}</td>
+				</tr>
+				<tr v-for="u in urls" v-if="u.value<4" class="bg-danger text-white bg-gradient">
+					<td>{{u.address}}</td>
+					<td>{{u.value}}</td>
+				</tr>
+            </tbody>
+        </table>
+    </div>
+	<div v-else-if="isLoading" style="margin-top: 70px;">
+		<loader />
+	</div>
+    <p v-else>
+        Как-то пустовато...
+    <p/>
+
+    <div class="logo mb-3 mt-5 pb-5 text-center">
+        <img src="img/center.png" width="20%" class="d-inline-block align-top">
+    </div>
+
+</div>
+
+<div class="d-flex justify-content-around fixed-bottom" style="background-color: #a1ffb7; height: 50px">
+    <img src="img/dstu.png" class="d-inline-block align-top mt-1 mb-1">
+    <img src="img/media-park.png" class="d-inline-block align-top mt-1 mb-1">
+    <p class="text-dark footerP" style="margin-top: 13px;">© 2021 Copyright, FixNaProde team, all rights reserved</p>
+    <img src="img/ddos.png" class="d-inline-block align-top mt-1 mb-1">
+    <img src="img/hack.png" class="d-inline-block align-top mt-1 mb-1">
+</div>
+<script type="module" src="app.js"></script>
 </body>
 </html>

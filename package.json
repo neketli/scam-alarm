@@ -1,26 +1,29 @@
 {
-  "name": "fix-na-prode",
-  "version": "1.0.0",
-  "description": "FixNaProde app",
+  "name": "hackathon-spring-2021-dstu",
+  "version": "14.8.8",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon ingex.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neketli/fix-na-prode.git"
+    "url": "git+https://gitlab.com/lab0rat/hackathon-spring-2021-dstu.git"
   },
-  "author": "FixNaProde team",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/neketli/fix-na-prode/issues"
+    "url": "https://gitlab.com/lab0rat/hackathon-spring-2021-dstu/issues"
   },
-  "homepage": "https://github.com/neketli/fix-na-prode#readme",
+  "homepage": "https://gitlab.com/lab0rat/hackathon-spring-2021-dstu#readme",
+  "dependencies": {
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.1",
+    "multer": "^1.4.2",
+    "python-shell": "^2.0.3"
+  },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  },
-  "dependencies": {
-    "express": "^4.17.1"
   }
 }
